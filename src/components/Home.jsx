@@ -1,10 +1,12 @@
 import { useGetAllProductQuery } from "../features/productApi";
 import "./style/home.scss"
 import { useNavigate } from 'react-router-dom'
-import { addToCart } from "../features/cartSlice";
-import { useDispatch } from 'react-redux'
+import { addToCart, getTotal } from "../features/cartSlice";
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from "react";
 // import { useSelector } from 'react-redux'
 const Home = () => {
+  const cart = useSelector((state) => state.cart)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   // const { item, status, errors } = useSelector((state) => state.product)
@@ -13,6 +15,7 @@ const Home = () => {
     dispatch(addToCart(item))
     // navigate('/cart')
   }
+  useEffect(() => { dispatch(getTotal()) }, [cart])
   return (
     <div className="home-container">
       {isLoading ? (<p>Loading ...</p>)
