@@ -11,7 +11,7 @@ const Home = () => {
   const { data: product, error, isLoading } = useGetAllProductQuery()
   const handleAddToCart = (item) => {
     dispatch(addToCart(item))
-    navigate('/cart')
+    // navigate('/cart')
   }
   return (
     <div className="home-container">
